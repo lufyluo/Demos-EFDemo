@@ -5,15 +5,16 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Demo.Entity;
 
 namespace Demo.Framework.Data
 {
     public class MyDbContext: DbContext
     {
         //在config中配置数据库的名称
-        private static string dbName = System.Configuration.ConfigurationManager.AppSettings["dbName"];
+        //private static string dbName = System.Configuration.ConfigurationManager.AppSettings["dbName"];
         public MyDbContext()
-            : base(dbName)
+            : base("dbName")
         {
             //解决团队开发中，多人迁移数据库造成的修改覆盖问题。
             Database.SetInitializer<MyDbContext>(null);
@@ -31,6 +32,10 @@ namespace Demo.Framework.Data
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
             base.OnModelCreating(modelBuilder);
         }
-        
+        //下面放置的是数据库对应的实体对象
+        //格式如下：
+        public DbSet<User> User { get; set; }
+        public DbSet<UserInfo> UserInfo { get; set; }
+        public DbSet<User_Roles> User_Roles { get; set; }
     }
 }

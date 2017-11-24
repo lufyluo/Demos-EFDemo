@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{766FE3C5-0664-418C-8821-AC408F7C1BBA}</ProjectGuid>
+    <ProjectGuid>{F1F9A82F-B93F-4B93-B322-5D0B5D637D93}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Demo.Framework</RootNamespace>
-    <AssemblyName>Demo.Framework</AssemblyName>
+    <RootNamespace>Demo.Migration</RootNamespace>
+    <AssemblyName>Demo.Migration</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,12 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=4.6.2.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.4.6.2\lib\net45\Autofac.dll</HintPath>
-    </Reference>
-    <Reference Include="EmitMapper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EmitMapper.1.0.0\lib\EmitMapper.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -44,12 +38,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.IO.Compression.FileSystem" />
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -58,30 +47,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\MyDbContext.cs" />
-    <Compile Include="DynamicInject\DynamicModule.cs" />
-    <Compile Include="EFRepositoryAsync\IRepositoryAsync.cs" />
-    <Compile Include="EFRepositoryAsync\IUnitOfWork.cs" />
-    <Compile Include="EFRepository\EntityRepository.cs" />
-    <Compile Include="EFRepository\IEntityRepository.cs" />
-    <Compile Include="EFRepository\IRepository.cs" />
-    <Compile Include="EFRepository\RepositoryBase.cs" />
-    <Compile Include="Log\DynamicModuleExtension.cs" />
-    <Compile Include="DynamicInject\LindContainer.cs" />
-    <Compile Include="Log\ILogger.cs" />
-    <Compile Include="Log\Logger.cs" />
-    <Compile Include="Log\NormalLogger.cs" />
+    <Compile Include="MigrationContext.cs" />
+    <Compile Include="Migrations\201711240817331_EFDemo.cs" />
+    <Compile Include="Migrations\201711240817331_EFDemo.Designer.cs">
+      <DependentUpon>201711240817331_EFDemo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Demo.Entity\Demo.Entity.csproj">
       <Project>{d2ed2900-8e4f-440f-95c9-a00c39361825}</Project>
       <Name>Demo.Entity</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Demo.Framework\Demo.Framework.csproj">
+      <Project>{766fe3c5-0664-418c-8821-ac408f7c1bba}</Project>
+      <Name>Demo.Framework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201711240817331_EFDemo.resx">
+      <DependentUpon>201711240817331_EFDemo.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

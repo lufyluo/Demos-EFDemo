@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Demo.Framework.Data;
 
 namespace Demo.Framework.EFRepository
 {
@@ -24,15 +25,15 @@ namespace Demo.Framework.EFRepository
 
         /// </summary>
 
-        private static OAContext dbContext = null;
+        private static MyDbContext dbContext = null;
 
-        protected static OAContext CreateInstance()
+        protected static MyDbContext CreateInstance()
 
         {
 
             if (dbContext == null)
 
-                dbContext = new OAContext();
+                dbContext = new MyDbContext();
 
             return dbContext;
 
@@ -42,7 +43,7 @@ namespace Demo.Framework.EFRepository
 
 
 
-        public OAContext _db = CreateInstance();
+        public MyDbContext _db = CreateInstance();
 
 
 
@@ -53,7 +54,6 @@ namespace Demo.Framework.EFRepository
         /// </summary>
 
         public virtual void SaveChanges()
-
         {
 
             this._db.Configuration.ValidateOnSaveEnabled = false;
